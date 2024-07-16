@@ -1,0 +1,261 @@
+PROGRAM 1:-
+
+
+mixin class parent{
+  int x = 10;
+  static int y = 199;
+  void printData(){
+    print(x);
+    print(y);
+  }
+}
+class child extends parent{
+  static int y = 200;
+  int x = 38;
+  void printData(){
+    print(super.x);
+    super.printData();
+  }
+}
+
+void main(){
+  child obj = new child();
+  obj.printData();
+}
+
+/**
+ * output: 
+10
+38
+199
+ */
+
+PROGRAM 2 :-
+
+mixin class parent{
+  int x =10;
+  static int y = 199;
+  void printData(){
+    print(x);
+    print(y);
+  }
+}
+
+class child extends parent{
+  int x = 38;
+  void printData(){
+    print("HII");
+
+  }
+}
+
+void main(){
+  child obj = new child();
+  obj.printData();
+}
+
+/**output: 
+ * HII
+ */
+
+PROGRAM 3 :-
+
+mixin class parent{
+  parent(){
+
+  }
+  int x =10;
+  static int y= 199;
+
+  void fun(){
+    print(x);
+    print(y);
+  }
+}
+class child extends parent{
+  int x= 38;
+  void gun(){
+    super.fun();
+  }
+}
+
+void main(){
+  child obj = new child();
+  obj.gun();
+}
+
+/**
+ * output: program3.dart:2:3: Error: Can't use 'parent' as a mixin because it has constructors.
+  parent(){
+ */
+PROGRAM 4 :-
+mixin Test{
+  int x= 20;
+  void demo(){
+    print("in test demo");
+  }
+  void fun2();
+}
+class Test2 with Test{
+  void demo(){
+    print("in test2 demo");
+    super.demo();
+  }
+
+  void fun2(){
+    print("in fun2");
+  }
+}
+
+void main(){
+  Test2 obj = new Test2();
+  obj.demo();
+
+
+}
+
+/**
+ * output: in test2 demo
+in test demo
+ */
+
+
+PROGRAM 5 :-
+
+mixin Test{
+
+  void demo(){
+    print("in test demo");
+  }
+}
+mixin Test2{
+
+  void demo(){
+    print("in test2 demo");
+  }
+}
+
+class Test3 with Test,Test2{
+
+  void demo(){
+    print("in test3 demo");
+    super.demo();
+  }
+
+  void fun2(){
+
+    print("IN fun2");
+  }
+}
+
+void main(){
+
+  Test3 obj=Test3();
+  obj.demo();
+}
+
+// output:= 
+// in test3 demo
+// in test2 demo
+PROGRAM 6 :-
+
+class Demo2{
+
+  Demo2(){
+    print("in demo2");
+  }
+}
+
+mixin Demo on Demo2{
+
+  void fun(){
+    print("in fun");
+  }
+}
+
+class Test extends Demo2 with Demo{
+
+  Test(){
+    print("In test");
+  }
+}
+
+void main(){
+  Test obj=new Test();
+}
+
+// output:= 
+// in demo2
+// In test
+
+PROGRAM 7 :-
+
+class Demo2{
+
+  Demo2(){
+    print("in demo2");
+  }
+
+  void fun(){
+
+    print("IN fun Demo2");
+  }
+}
+
+mixin Demo on Demo2{
+
+  void fun(){
+    print("in fun Demo");
+  }
+}
+
+class Test extends Demo2 with Demo{
+
+  Test(){
+    print("In test");
+  }
+}
+
+void main(){
+  Test obj=new Test();
+  obj.fun();
+}
+
+// output:= 
+// in demo2
+// In test
+// in fun Demo
+PROGRAM 8 :-
+
+mixin Demo {
+  int x = 10;
+  void fun() {
+    print(x);
+  }
+}
+
+class Demo2 {
+  int x;
+  Demo2(this.x);
+}
+
+class Test extends Demo2 with Demo {
+  int x = 66;
+
+  Test() : super(7);
+
+  void fun() {
+    print(super.x);
+    super.fun();
+  }
+}
+
+void main() {
+  Demo obj = new Test();
+  obj.fun();
+}
+
+// output:=
+// 10
+// 66
+

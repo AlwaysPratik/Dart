@@ -1,0 +1,356 @@
+ Program 1:
+
+class Company {
+	void compName() {
+		print("Google");
+	}
+}
+class Employee extends Company {
+	void compName(){
+		print("Apple");
+	}
+}
+
+void main() {
+	
+	Company obj = Employee();
+	obj.compName();
+}
+
+/*
+Output :
+Apple
+
+Explanation: compName method is override by the child class and we call child class method so
+
+*/
+
+
+ Program 2:
+
+class Demo {
+	
+	void fun();
+}
+
+class Demo1 implements Demo {
+	void fun() {}
+}
+
+void main() {
+	Demo obj = new Demo1();
+}
+
+/*
+output:
+ Error: The non-abstract class 'Demo' is missing implementations for these members:
+ - Demo.fun
+Try to either
+ - provide an implementation,
+ - inherit an implementation from a superclass or mixin,
+ - mark the class as abstract, or
+ - provide a 'noSuchMethod' implementation.
+
+class Demo {
+      ^^^^
+program2.dart:5:7: Context: 'Demo.fun' is defined here.
+        void fun();
+
+
+Explanation : the function have no body so we have to declare that class as abstract
+
+*/
+
+Program 3:
+
+class Test {
+	double x = 10.7;
+
+	num fun() {
+	  return x;
+	}
+}
+
+class Child extends Test {
+	
+	int y = 9;
+	int fun() {
+		var x = super.fun();
+		print(x.runtimeType);
+		x = 10;
+		return 10;
+	}
+}
+
+void main() {
+	
+	Child obj = new Child();
+	obj.fun();
+}
+
+/* 
+Output:
+double
+
+Explanation: we call childs fun function and from child fun function callls the parent fun function so in child fun it take x from the parent fun and then assign the its x
+
+*/
+
+ program 4 :
+
+class Test {
+	
+	int? x;
+	Test(this.x);
+
+	void fun() {
+		this.x = 99;
+	}
+}
+
+class Test2 extends Test {
+	
+	int? x;
+	Test2 (this.x,int y):super(y);
+
+	void fun() {
+		print(x);
+		super.fun();
+		print(x);
+		print(super.x);
+	}
+}
+
+void main() {
+	
+	Test2 obj = Test2(4,6);
+	obj.fun();
+}
+
+/*
+Output:
+4
+99
+6
+
+
+Explanation: Super call is performed
+
+*/
+
+
+Program 5:
+
+class Test {
+	
+	void fun() {
+	 print("test class");
+	}
+	static void gun() {
+		print("in static test");
+	}
+}
+class Test2 extends Test {
+	
+	@override
+	int fun(){
+		super.fun();
+		return 10;
+	}
+	@override 
+	void gun() {
+		print("in test2 gun");
+		super.gun();
+	}
+}
+
+void main() {
+	Test2 obj = Test2();
+	obj.fun();
+}
+
+
+/*
+Output:
+program5.dart:22:9: Error: Superclass has no method named 'gun'.
+                super.gun();
+                      ^^^
+*/
+
+
+Program 6:
+
+class Parent {
+	int x = 10;
+
+	Parent();
+	void getData() {
+		print(x);
+	}
+}
+
+class Child extends Parent{
+	
+	double y= 10;
+	static String str = "Core2Web";
+
+	Child();
+
+	@override 
+	int getData() {
+		print(y);
+		 return 10;
+	}
+	
+}
+
+void main() {
+	
+	Child obj = new Child();
+	obj.getData();
+}
+
+
+
+//Output: 10.0
+
+
+
+Program 7 ;
+
+abstract class Parent {
+	
+	int x;
+	int y = 7;
+
+	Parent(this.x);
+
+	void printData() {
+	   print(x);
+	}
+}
+
+class Child extends Parent {
+	Child(int x,int y):super(y);
+
+	int printData() {
+		print(x);
+		print(y);
+		return 3;
+	}
+}
+
+void main() {
+	
+	Child obj = new Child(6,7);
+	obj.printData();
+}
+
+
+/*
+Output:
+7
+7
+
+*/
+
+
+program 8 :
+
+class Test {
+	int x = 6;
+	Test();
+
+	void printData() {
+		print(x);
+	}
+}
+
+class Test2 {
+	
+	int x = 9;
+
+	Test2() {
+		print("In Test2");
+	}
+}
+
+class Child extends Test implements Test2{
+	
+	int x = 7;
+	void printData() {
+		print(super.x);
+		super.printData();
+	}
+}
+
+void main() {
+	
+	Child obj = new Child();
+	obj.printData();
+}
+
+
+/*
+Output:
+6
+7
+*/
+
+
+
+program 9:
+
+abstract class Test {
+	void build();
+}
+
+class Test2 extends Test {
+	
+	@override 
+	void build(){
+		super.build;
+	}
+} 
+
+/*
+program9.dart:11:9: Error: Superclass has no getter named 'build'.
+                super.build;
+
+*/
+
+
+program 10:
+
+abstract class Test {
+	int x;
+	Test(this.x) {
+		print("in constructor");
+	}
+	void fun() {
+		print("Fun");
+	}
+	void gun();
+}
+
+class Test2 extends Test {
+	Test2(super.x);
+	void gun() {
+		print("In gun");
+	}
+}
+
+void main() {
+	
+	Test2 obj = new Test2(10);
+	obj.fun();
+	obj.gun();
+}
+
+/*
+Output:
+in constructor
+Fun
+In gun
+
+*/

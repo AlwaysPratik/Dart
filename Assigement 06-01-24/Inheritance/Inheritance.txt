@@ -1,0 +1,352 @@
+Program 1
+
+class Test {
+
+  int x=10;
+  Test(this.x);
+}
+
+class Test2 extends Test {
+
+  Test2(super.x);
+}
+void main() {
+  Test2 obj=Test2(10);
+  Test obj2=Test(30);
+  obj.x=19;
+
+  print(obj.x);
+  print(obj2.x);
+}
+
+Output-
+
+19
+30
+
+//
+
+
+
+Program 2
+
+class Test {
+
+  int x=30;
+}
+
+class Test2 extends Test {
+  int x;
+  Test2(this.x);
+
+  void gun() {
+    this.x=8;
+  }
+  void fun() {
+    print(this.x);
+    print(super.x);
+  }
+}
+
+void main() {
+  Test obj=Test2(10);
+  obj.gun();
+  obj.fun();
+}
+
+
+Error: The method 'gun' isn't defined for the class 'Test'.
+ - 'Test' is from 'program2.dart'.
+Try correcting the name to the name of an existing method, or defining a method named 'gun'.
+
+Error: The method 'fun' isn't defined for the class 'Test'.
+ - 'Test' is from 'program2.dart'.
+Try correcting the name to the name of an existing method, or defining a method named 'fun'.
+
+//
+
+
+
+Program 3
+
+
+class Test {
+
+  int x=30;
+  int y=30;
+}
+
+class Test2 extends Test {
+  int x;
+  Test2(this.x);
+
+  void gun() {
+    this.x=8;
+    this.y=19;
+  }
+  void fun() {
+    print(super.x);
+    print(super.y);
+  }
+}
+void main() {
+  Test2 obj=Test2(10);
+  obj.gun();
+  obj.fun();
+}
+
+Output-
+
+30
+19
+
+//
+
+
+
+
+Program 4
+
+
+
+class Test {
+
+  int x;
+  int? y;
+  Test({required this.x,this.y});
+}
+class Test2 extends Test {
+  Test2(int x,int y):super(x:88) {
+    print(x);
+  }
+  void fun() {
+    print(this.x);
+    print(super.x);
+  }
+}
+
+void main() {
+
+  Test2 obj=Test2(19,20);
+  obj.fun();
+}
+
+Output-
+
+19
+88
+88
+
+//
+
+
+
+Program 5
+
+
+class Test{
+  int x = 20;
+  String str = "Core2Web";
+
+  void parMeth(){
+    print(x);
+    print(str);
+
+  }
+
+
+}
+class Test2 extends Test{
+  int x = 10;
+  String str = "Incubator";
+
+  void childMeth(){
+    print(x);
+    print(str);
+  }
+}
+
+void main(){
+  Test2 obj = new Test2();
+  obj.parMeth();
+  obj.childMeth();
+}
+
+
+ Output: 
+10
+Incubator
+10
+Incubator
+
+  //we used child's ref and object too hence it giving us incubator as o/p for both methods.
+
+
+
+Program 6
+
+
+class Test{
+  int? x;
+  Test(this.x){
+    print("in test");
+  }
+}
+class Test2 extends Test{
+  int? y;
+  Test2(this.y, int x):super(x);
+}
+class Test3 extends Test2{
+  int? z;
+// by rohit kachare
+  Test3(this.z,int y, int x):super(y,x){                                  
+    print("int test3");
+
+  }
+}
+void main(){
+  Test3 obj = Test3(10, 20, 30);
+}
+
+
+
+output- 
+in test
+int test3
+
+
+
+Program 7
+
+
+class demo1{
+  int x;
+  demo1(this.x);
+}
+class demo2 extends demo1{
+  demo2(super.x);
+
+  void fun(){
+    print(x);
+
+  }
+}
+
+void main(){
+  // demo obj1 = demo2();
+  demo1 obj2 = demo1(10);
+
+  obj2.fun();
+}
+
+Output-
+program7.dart:18:8: Error: The method 'fun' isn't defined for the class 'demo1'.
+ - 'demo1' is from 'program7.dart'.
+Try correcting the name to the name of an existing method, or defining a method named 'fun'.
+  obj2.fun();
+
+  //we used the parent ref and child object hence we can only call the methods that are present in both parent and child .
+  we cannot call the methods which are only in child class.
+  
+
+Program 8
+
+
+
+class Parent{
+  Parent(){
+    print("in par const");
+  }
+
+}
+class child extends Parent{
+  child(){
+  super();
+  print("in child const");
+  }
+}
+
+void main(){
+  child obj = new child();
+
+}
+
+ output-
+program8.dart:9:3: Error: Superclass has no method named 'call'.
+  super();
+  
+
+
+Program 9
+
+
+
+class Test{
+
+  int? x;
+  static int y=20;
+  Test.initX(this.x);
+
+  static void changeY(){
+
+    y=30;
+  }
+}
+
+class Test2 extends Test{
+
+  Test2(int x):super.initX(x);
+}
+
+void main(){
+Test2 obj=Test2(40);
+Test2.changeY();
+print(Test2.y);
+}
+
+
+
+// output:= Error: Member not found: 'Test2.changeY'.
+// Test2.changeY();
+//       ^^^^^^^
+// pro9.dart:21:13: Error: Member not found: 'y'.
+// print(Test2.y);
+//             ^
+
+// explanation:= 
+
+// As changeY is static and we cannot call by child class Name and y is also static same we cannot call from child class 
+
+
+
+
+Program 10
+
+
+
+abstract class Demo1 {
+  factory Demo1() {
+    return Demo2();
+  }
+}
+
+class Demo2 implements Demo1 {
+  Demo2() {
+    print("Demo2");
+  }
+}
+
+void main() {
+  Demo1 obj = new Demo1();
+}
+
+
+
+// Output:- Demo2
+
+//Explanation:- in this code we have used factory constructor which returns the object of its child constructor->"Demo2"
+
+  
+
+
+  

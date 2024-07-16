@@ -1,0 +1,296 @@
+Program 1
+
+class Test {
+
+  final int x;
+  final int y;
+
+  const Test(this.x, this.y) {
+    print("IN const constructor");
+  }
+}
+void main(){
+
+  Test obj=Test(10,20);
+  print(obj.x);
+}
+
+Error: A const constructor can't have a body. Try removing either the 'const' keyword or the body. const Test(this.x, this.y)
+ 
+// const constructor la body naste. body remove kara nahi tar const keyword remove kara.
+
+
+
+
+Program 2
+
+class Employee {
+
+  int? empld;
+  String? empName;
+
+  Employee() {}
+  Employee(int emoid, String empName) {}
+
+}
+
+void main() {
+  Employee obj=new Employee();
+}
+
+
+Error: 'Employee' is already declared in this scope. Employee(int emoid, String empName) {}
+	Can't use 'Employee' because it is declared more than once. Employee obj=new Employee();
+
+// Name constructor use kel pahije. object madhe same Name chalat Nahit.
+
+
+
+Pragram 3
+
+class Demo {
+
+  final int? x;
+  final String? str;
+
+  const Demo(this.x,this.str);
+
+}
+
+void main() {
+
+  Demo obj1=const Demo(10,"core2web");
+  print(obj1.hashCode);
+
+  Demo obj2=const Demo(10,"Biencaps");
+  print(obj2.hashCode);
+
+}
+
+
+Output-
+
+616303909
+495014295
+
+// 2 Different Value Parhavle Tya mule hashCode Defferent aala aahe. Same Value Pathavle asel tar hashcode same yenar aahet. 
+
+
+
+Program 4
+
+class Company {
+
+  int empCount;
+  String compName;
+
+  Company(this.empCount,[this.compName="Biencaps"]);
+
+  void compInfo() {
+    print(empCount);
+    print(compName);
+  }
+}
+
+void main() {
+
+  Company obj1=new Company(100);
+  Company obj2=new Company(200,"Pubmatic");
+
+  obj1.compInfo();
+  obj2.compInfo();
+
+}
+
+
+Output-
+
+100
+Biencaps
+200
+Pubmatic
+
+// Optional constructor dila aahe. 1 parameter dila tari chalel aani 2 parameter dile tari clalel.
+
+
+Program 5
+
+class Company {
+  int? x;
+  String? str;
+
+  Company(this.x,{this.str="Core2web"});
+
+  void compInfo() {
+    print(x);
+    print(str);
+  }
+
+  void main() {
+    Company obj1=new Company(100);
+    Company obj2=new Company(200,"Incubator");
+
+    obj1.compInfo();
+    obj2.compInfo();
+  }
+
+}
+
+
+Error: Too many positional arguments: 1 allowed, but 2 found. Try removing the extra positional arguments.
+
+// Defult constructor aahe 1 parameter pass karava lagto.
+
+
+Program 6
+
+class Company {
+  int? empCount;
+  String compName;
+
+  Company({this.empCount,this.compName="Deloitte"});
+
+  void compInfo() {
+    print(empCount);
+    print(compName);
+  }
+}
+
+void main() {
+  Company obj1=new Company(empCount:100,compName:"Veritas");
+  Company obj2=new Company(compName:"Pubmatic",empCount:200);
+
+  obj1.compInfo();
+  obj2.compInfo();
+}
+
+
+Output-
+
+100
+Veritas
+200
+Pubmatic
+
+// Defult constructor aani named Defult constructor use kel aahe.
+
+
+Program 7
+
+class Point {
+
+  int x;
+  int y;
+
+}
+
+void mian() {
+  Point obj=Point();
+}
+
+Error: Field 'x' should be initialized because its type 'int' doesn't allow null. int x;
+Error: Field 'y' should be initialized because its type 'int' doesn't allow null. int y;
+
+//
+
+
+
+Program 8
+
+
+class Player {
+
+  int? jerNo;
+  String? pName;
+
+  const Player(this.jerNo,this.pName);
+}
+void main(){
+  Player obj=const(45,"Rohit");
+}
+
+
+Error: A value of type '(int, String)' can't be assigned to a variable of type 'Player'.'Player' is from 'program8.dart'.
+Error: Constructor is marked 'const' so all fields must be final. const Player(this.jerNo,this.pName);
+
+// const constructor use kela aahe . "Final" constructor lihayala pahije hota.
+
+
+
+Program 9
+
+int a=10;
+class Test {
+
+  int x=20; 
+  int y=20;
+  static num z=30;
+
+  Test(this.x,this.y,this.a);
+
+  void fun() {
+    print(a);
+    print(x);
+    print(y);
+  }
+}
+
+void main() {
+
+  Test obj=Test(10,30,40);
+  obj.fun();
+}
+
+Error: 'a' isn't an instance field of this class. Test(this.x,this.y,this.a);
+
+// int a=10; he class cya baher aahe. x=20,y=20 he class cya aat aahet.
+
+
+
+Program 10
+
+class Demo {
+  Demo() {
+    print("In demo");
+  }
+  factory Demo() {
+    print("In Demo factory");
+    return Demo();
+  }
+}
+
+void main() {
+  Demo obj=new Demo();
+}
+
+
+ Error: 'Demo' is already declared in this scope. factory Demo() {
+ Error: Can't use 'Demo' because it is declared more than once.return Demo();
+
+//Demo declare kel aahe te sarkha declare karta yet nahi.
+
+
+Program 11
+
+
+class Test {
+  Test._private() {
+    print("In demo");
+  }
+
+  factory Test() {
+    print("In demo factory");
+    return Test._private();
+  }
+}
+
+void mian() {
+  Test obj=new Test();
+}
+
+
+Output-
+In demo factory
+In demo
+
+
